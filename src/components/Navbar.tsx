@@ -43,12 +43,23 @@ export default function Navbar() {
     href: string
   ) => {
     e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    // Close mobile menu first so layout settles before we measure
     setMobileOpen(false);
+
+    // Small delay on mobile lets the drawer close animation finish
+    // before we calculate the scroll position
+    setTimeout(() => {
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Offset by navbar height (64px) + a little breathing room (8px)
+      const NAVBAR_HEIGHT = 72;
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+
+      window.scrollTo({ top, behavior: "smooth" });
+    }, 50);
   };
 
   return (

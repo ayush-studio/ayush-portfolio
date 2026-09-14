@@ -30,6 +30,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset all sections by the fixed navbar height so they aren't hidden behind it */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
