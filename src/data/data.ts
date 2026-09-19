@@ -152,7 +152,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 export const PROJECT_LIVE_URLS: Record<string, string> = {
   "code-scanner": "https://code-scanner-liard.vercel.app/",
   "code_scanner": "https://code-scanner-liard.vercel.app/",
-  "gaming-studio": "https://github.com/ayush-studio/gaming-studio",
+  "gaming-studio": "https://gaming-studio-khaki.vercel.app/",
+  "gaming_studio": "https://gaming-studio-khaki.vercel.app/",
 };
 
 // ─── Fallback Projects (used when GitHub API rate-limits or offline) ───────────
@@ -180,11 +181,12 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
   {
     name: "Gaming Studio",
     description:
-      "Nexus Forge — full-stack indie game marketplace built with Angular 17, Express.js & SQLite. Features a 12-game catalog, reactive cart powered by Angular Signals, 3D flip checkout, and a canvas scratch-off license key reveal.",
+      "Nexus Forge — full-stack indie game marketplace built with Angular 17, Express.js & Vercel Serverless. Features a 12-game catalog, reactive cart powered by Angular Signals, 3D flip checkout, and a canvas scratch-off license key reveal.",
     language: "TypeScript",
-    stars: 0,
+    stars: 1,
     url: "https://github.com/ayush-studio/gaming-studio",
-    topics: ["angular", "express", "sqlite", "typescript", "full-stack"],
+    homepage: "https://gaming-studio-khaki.vercel.app/",
+    topics: ["angular", "serverless", "typescript", "full-stack", "marketplace"],
   },
   {
     name: "OmniVerse",
