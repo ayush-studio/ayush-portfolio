@@ -31,6 +31,16 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
   const normalizedKey = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
   const liveUrl = PROJECT_LIVE_URLS[normalizedKey] || PROJECT_LIVE_URLS[name.toLowerCase()] || rawHomepage || null;
 
+  // Check if liveUrl points to the portfolio itself or internal anchor
+  const isSelfReferencing = !liveUrl || liveUrl === "#" || liveUrl.startsWith("#") || liveUrl.includes("ayush-portfolio");
+
+  const handleLiveClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isSelfReferencing) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const topics: string[] =
     type === "github"
       ? (data as GithubRepo).topics ?? []
@@ -63,7 +73,7 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
           <h3 className="font-bold text-[var(--text-primary)] text-lg leading-snug group-hover:text-[var(--accent)] transition-colors line-clamp-1">
             {name.replace(/-/g, " ").replace(/_/g, " ")}
           </h3>
-          {liveUrl && (
+          {liveUrl && !isSelfReferencing && (
             <span className="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
               Live App
             </span>
@@ -121,17 +131,18 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
           <div className="flex items-center gap-2">
             {liveUrl && (
               <motion.a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={isSelfReferencing ? "#home" : liveUrl}
+                target={isSelfReferencing ? "_self" : "_blank"}
+                rel={isSelfReferencing ? undefined : "noopener noreferrer"}
+                onClick={handleLiveClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg
                            bg-indigo-600 text-white hover:bg-indigo-500 transition-colors shadow-sm"
-                title="Open Live Deployed Application"
+                title={isSelfReferencing ? "Scroll to Top of Page" : "Open Live Deployed Application"}
               >
                 <Globe size={12} />
-                Live Demo
+                {isSelfReferencing ? "Back to Top" : "Live Demo"}
               </motion.a>
             )}
 
