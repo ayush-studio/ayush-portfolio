@@ -156,6 +156,18 @@ export const PROJECT_LIVE_URLS: Record<string, string> = {
   "gaming_studio": "https://gaming-studio-khaki.vercel.app/",
 };
 
+// ─── Rich Description Overrides (if GitHub API description is missing) ───────
+export const PROJECT_DESCRIPTIONS: Record<string, string> = {
+  "code-scanner":
+    "Deterministic static architecture analyzer built with React, Vite, Tailwind CSS & Vercel Serverless. Extracts codebase metrics, builds interactive File Lineage dependency graphs, and auto-generates HLD & LLD Mermaid flowcharts with zero AI API costs.",
+  "code_scanner":
+    "Deterministic static architecture analyzer built with React, Vite, Tailwind CSS & Vercel Serverless. Extracts codebase metrics, builds interactive File Lineage dependency graphs, and auto-generates HLD & LLD Mermaid flowcharts with zero AI API costs.",
+  "gaming-studio":
+    "Nexus Forge — full-stack indie game marketplace built with Angular 17, Express.js & Vercel Serverless. Features a 12-game catalog, reactive cart powered by Angular Signals, 3D flip checkout, and a canvas scratch-off license key reveal.",
+  "gaming_studio":
+    "Nexus Forge — full-stack indie game marketplace built with Angular 17, Express.js & Vercel Serverless. Features a 12-game catalog, reactive cart powered by Angular Signals, 3D flip checkout, and a canvas scratch-off license key reveal.",
+};
+
 // ─── Fallback Projects (used when GitHub API rate-limits or offline) ───────────
 export interface FallbackProject {
   name: string;

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Star, GitFork, ExternalLink, Globe, Code2 } from "lucide-react";
 import type { GithubRepo } from "@/lib/github";
 import type { FallbackProject } from "@/data/data";
-import { LANGUAGE_COLORS, PROJECT_LIVE_URLS } from "@/data/data";
+import { LANGUAGE_COLORS, PROJECT_LIVE_URLS, PROJECT_DESCRIPTIONS } from "@/data/data";
 
 type CardData =
   | { type: "github"; data: GithubRepo }
@@ -20,7 +20,13 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
 
   // Normalize fields across both types
   const name = data.name;
-  const description = data.description ?? "No description provided.";
+  const normalizedKey = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
+  
+  const rawDesc = data.description?.trim();
+  const description = rawDesc && rawDesc !== "No description provided."
+    ? rawDesc
+    : (PROJECT_DESCRIPTIONS[normalizedKey] || PROJECT_DESCRIPTIONS[name.toLowerCase()] || "Full-stack web application built with modern architecture.");
+
   const language = data.language ?? null;
   const stars = type === "github" ? (data as GithubRepo).stargazers_count : (data as FallbackProject).stars;
   const forks = type === "github" ? (data as GithubRepo).forks_count : 0;
@@ -28,7 +34,6 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
   
   // Resolve live URL from repo homepage, override map, or fallback data
   const rawHomepage = type === "github" ? (data as GithubRepo).homepage : (data as FallbackProject).homepage;
-  const normalizedKey = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
   const liveUrl = PROJECT_LIVE_URLS[normalizedKey] || PROJECT_LIVE_URLS[name.toLowerCase()] || rawHomepage || null;
 
   // Check if liveUrl points to the portfolio itself or internal anchor
