@@ -14,20 +14,20 @@ export const NAV_LINKS = [
 ];
 
 // ─── About Section ───────────────────────────────────────────────────────────
-export const ABOUT_SUMMARY = `Frontend Developer with 2.5+ years of experience at Deloitte USI, building scalable enterprise web applications using React, Angular, JavaScript, and TypeScript. Passionate about integrating AI capabilities into modern workflows and creating seamless end-to-end functionality — from intuitive UI design to intelligent backend services powered by Generative AI and LLMs.`;
+export const ABOUT_SUMMARY = `Frontend Developer with 2.5+ years of experience at Deloitte USI, building scalable enterprise web applications using React, Angular, Next.js, JavaScript, and TypeScript. Passionate about architecting high-speed developer tools, static code analysis engines, and integrating AI capabilities into modern workflows — from intuitive UI design to serverless microservices and intelligent GenAI systems.`;
 
 export const ABOUT_STATS = [
   { label: "Years of Experience", value: "2.5+" },
   { label: "Enterprise Projects", value: "10+" },
-  { label: "AI Integrations", value: "5+" },
+  { label: "AI & Serverless Tools", value: "6+" },
   { label: "Award", value: "🏆 Applause" },
 ];
 
 // ─── Experience Section ───────────────────────────────────────────────────────
 export interface ExperienceBullet {
-  icon: string; // emoji icon for visual variety
+  icon: string;
   text: string;
-  highlight?: string; // optional badge label
+  highlight?: string;
 }
 
 export interface ExperienceItem {
@@ -61,7 +61,7 @@ export const EXPERIENCE: ExperienceItem[] = [
       },
       {
         icon: "🚀",
-        text: "Developed scalable React-based enterprise applications, utilising AI-driven tools like 'Lovable' to generate intuitive UX designs and significantly accelerate the frontend UI development lifecycle.",
+        text: "Developed scalable React-based enterprise applications, utilizing AI-driven tools like 'Lovable' to generate intuitive UX designs and significantly accelerate the frontend UI development lifecycle.",
       },
       {
         icon: "🎨",
@@ -90,51 +90,53 @@ export const EXPERIENCE: ExperienceItem[] = [
 // ─── Skills Section ───────────────────────────────────────────────────────────
 export interface SkillCategory {
   label: string;
-  color: string; // tailwind text color class
-  bgColor: string; // tailwind bg color class
+  color: string;
+  bgColor: string;
   skills: string[];
 }
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    label: "Frontend",
+    label: "Frontend & UI",
     color: "text-indigo-400",
     bgColor: "bg-indigo-500/10 border-indigo-500/30",
     skills: [
       "React",
       "Angular",
       "Next.js",
-      "JavaScript",
       "TypeScript",
+      "JavaScript",
       "Tailwind CSS",
+      "Mermaid.js",
+      "Zustand",
       "RxJS",
       "Context API",
-      "HTML5",
-      "CSS3 / SCSS",
+      "HTML5 / SCSS",
     ],
   },
   {
-    label: "Backend & APIs",
+    label: "Backend & Serverless",
     color: "text-emerald-400",
     bgColor: "bg-emerald-500/10 border-emerald-500/30",
     skills: [
+      "Vercel Serverless",
+      "Node.js",
+      "Express.js",
       "Python",
       "FastAPI",
       "GraphQL",
       "REST APIs",
-      "Node.js",
       "Swagger UI",
-      "Express.js",
       "SQLite",
     ],
   },
   {
-    label: "AI & DevTools",
+    label: "AI, DevTools & Architecture",
     color: "text-violet-400",
     bgColor: "bg-violet-500/10 border-violet-500/30",
     skills: [
-      "Generative AI",
-      "LLMs",
+      "Static Code Analysis",
+      "Generative AI & LLMs",
       "NLP Integration",
       "Cursor IDE",
       "Claude AI",
@@ -146,17 +148,35 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
-// ─── Fallback Projects (used when GitHub API rate-limits) ─────────────────────
+// ─── Direct Live Demo URL Overrides ───────────────────────────────────────────
+export const PROJECT_LIVE_URLS: Record<string, string> = {
+  "code-scanner": "https://code-scanner-liard.vercel.app/",
+  "code_scanner": "https://code-scanner-liard.vercel.app/",
+  "gaming-studio": "https://github.com/ayush-studio/gaming-studio",
+};
+
+// ─── Fallback Projects (used when GitHub API rate-limits or offline) ───────────
 export interface FallbackProject {
   name: string;
   description: string;
   language: string;
   stars: number;
   url: string;
+  homepage?: string;
   topics: string[];
 }
 
 export const FALLBACK_PROJECTS: FallbackProject[] = [
+  {
+    name: "Zero-LLM Codebase Scanner",
+    description:
+      "Deterministic static architecture analyzer built with React, Vite, Tailwind CSS & Vercel Serverless. Extracts codebase metrics, builds interactive File Lineage dependency graphs, and auto-generates HLD & LLD Mermaid diagrams with zero AI API costs.",
+    language: "TypeScript",
+    stars: 1,
+    url: "https://github.com/ayush-studio/code-scanner",
+    homepage: "https://code-scanner-liard.vercel.app/",
+    topics: ["react", "serverless", "static-analysis", "mermaid", "typescript"],
+  },
   {
     name: "Gaming Studio",
     description:

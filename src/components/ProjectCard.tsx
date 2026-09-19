@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, GitFork, ExternalLink } from "lucide-react";
+import { Star, GitFork, ExternalLink, Globe, Code2 } from "lucide-react";
 import type { GithubRepo } from "@/lib/github";
 import type { FallbackProject } from "@/data/data";
-import { LANGUAGE_COLORS } from "@/data/data";
+import { LANGUAGE_COLORS, PROJECT_LIVE_URLS } from "@/data/data";
 
 type CardData =
   | { type: "github"; data: GithubRepo }
@@ -15,10 +15,6 @@ interface ProjectCardProps {
   index: number;
 }
 
-/**
- * ProjectCard — Displays a single project from GitHub API or fallback data.
- * Features glassmorphism, hover glow, language color dot, stars, and external link.
- */
 export default function ProjectCard({ card, index }: ProjectCardProps) {
   const { type, data } = card;
 
@@ -28,7 +24,13 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
   const language = data.language ?? null;
   const stars = type === "github" ? (data as GithubRepo).stargazers_count : (data as FallbackProject).stars;
   const forks = type === "github" ? (data as GithubRepo).forks_count : 0;
-  const url = type === "github" ? (data as GithubRepo).html_url : (data as FallbackProject).url;
+  const githubUrl = type === "github" ? (data as GithubRepo).html_url : (data as FallbackProject).url;
+  
+  // Resolve live URL from repo homepage, override map, or fallback data
+  const rawHomepage = type === "github" ? (data as GithubRepo).homepage : (data as FallbackProject).homepage;
+  const normalizedKey = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
+  const liveUrl = PROJECT_LIVE_URLS[normalizedKey] || PROJECT_LIVE_URLS[name.toLowerCase()] || rawHomepage || null;
+
   const topics: string[] =
     type === "github"
       ? (data as GithubRepo).topics ?? []
@@ -56,10 +58,17 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
            style={{ background: "radial-gradient(circle at 50% 0%, rgba(99,102,241,0.08), transparent 70%)" }} />
 
       <div className="relative z-10 flex flex-col h-full">
-        {/* Repo name */}
-        <h3 className="font-bold text-[var(--text-primary)] text-lg leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-1">
-          {name.replace(/-/g, " ").replace(/_/g, " ")}
-        </h3>
+        {/* Repo title & badge */}
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <h3 className="font-bold text-[var(--text-primary)] text-lg leading-snug group-hover:text-[var(--accent)] transition-colors line-clamp-1">
+            {name.replace(/-/g, " ").replace(/_/g, " ")}
+          </h3>
+          {liveUrl && (
+            <span className="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              Live App
+            </span>
+          )}
+        </div>
 
         {/* Description */}
         <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
@@ -69,7 +78,7 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
         {/* Topics */}
         {topics.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-4">
-            {topics.slice(0, 3).map((topic) => (
+            {topics.slice(0, 4).map((topic) => (
               <span
                 key={topic}
                 className="px-2 py-0.5 rounded-full text-xs font-medium
@@ -81,7 +90,7 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Footer: language + stats + link */}
+        {/* Footer: language + stats + action buttons */}
         <div className="flex items-center justify-between gap-2 mt-auto pt-4 border-t border-[var(--border-color)]">
           {/* Language tag */}
           <div className="flex items-center gap-3 text-xs text-[var(--text-secondary)]">
@@ -108,20 +117,39 @@ export default function ProjectCard({ card, index }: ProjectCardProps) {
             )}
           </div>
 
-          {/* View on GitHub */}
-          <motion.a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg
-                       bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20
-                       hover:bg-[var(--accent)]/20 transition-colors duration-200"
-          >
-            View
-            <ExternalLink size={11} />
-          </motion.a>
+          {/* Buttons: Live Demo + GitHub */}
+          <div className="flex items-center gap-2">
+            {liveUrl && (
+              <motion.a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg
+                           bg-indigo-600 text-white hover:bg-indigo-500 transition-colors shadow-sm"
+                title="Open Live Deployed Application"
+              >
+                <Globe size={12} />
+                Live Demo
+              </motion.a>
+            )}
+
+            <motion.a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-lg
+                         bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20
+                         hover:bg-[var(--accent)]/20 transition-colors duration-200"
+              title="View Source Code on GitHub"
+            >
+              <Code2 size={12} />
+              Code
+            </motion.a>
+          </div>
         </div>
       </div>
     </motion.div>
