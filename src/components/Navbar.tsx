@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Code2 } from "lucide-react";
+import { Menu, X, Code2, FileText } from "lucide-react";
 import { NAV_LINKS } from "@/data/data";
 import ThemeToggle from "./ThemeToggle";
 
@@ -118,8 +118,20 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Right Side: Theme Toggle + Mobile Button */}
-            <div className="flex items-center gap-3">
+            {/* Right Side: Resume Button + Theme Toggle + Mobile Button */}
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+                           bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/25
+                           hover:bg-[var(--accent)]/20 transition-all duration-200"
+                title="View Resume PDF"
+              >
+                <FileText size={13} />
+                Resume
+              </a>
               <ThemeToggle />
               <button
                 id="mobile-menu-btn"
@@ -186,6 +198,17 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex items-center justify-center gap-2 mt-2 px-4 py-2.5 text-sm font-semibold rounded-lg
+                           bg-[var(--accent)] text-white shadow-md shadow-indigo-500/20"
+              >
+                <FileText size={15} />
+                View Resume (PDF)
+              </a>
             </div>
           </motion.div>
         )}

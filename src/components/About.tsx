@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { User, Briefcase, Brain, Award } from "lucide-react";
+import { Briefcase, Brain, Award } from "lucide-react";
 import { ABOUT_SUMMARY, ABOUT_STATS } from "@/data/data";
 
 const STAT_ICONS = [Briefcase, Award, Brain, Award];
@@ -57,20 +58,36 @@ export default function About() {
           >
             <div className="relative">
               {/* Animated gradient ring */}
-              <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl p-[2px]"
+              <div className="w-72 h-88 sm:w-80 sm:h-96 rounded-3xl p-[2px]"
                    style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6)" }}>
-                <div className="w-full h-full rounded-3xl glass flex flex-col items-center justify-center gap-4 relative overflow-hidden">
+                <div className="w-full h-full rounded-3xl glass flex flex-col items-center justify-center gap-3.5 relative overflow-hidden py-6">
                   {/* Background glow */}
                   <div className="absolute inset-0 opacity-20"
                        style={{ background: "radial-gradient(circle at 50% 50%, #6366f1, transparent 70%)" }} />
-                  {/* Avatar Icon */}
-                  <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-xl shadow-indigo-500/40">
-                    <User size={40} className="text-white" />
+                  {/* Avatar Image */}
+                  <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 shadow-xl shadow-indigo-500/30">
+                    <div className="w-full h-full rounded-full overflow-hidden relative">
+                      <Image
+                        src="/profile.jpg"
+                        alt="Ayush Kumar"
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 640px) 112px, 128px"
+                        priority
+                      />
+                    </div>
                   </div>
-                  <div className="relative z-10 text-center px-6">
-                    <p className="text-xl font-bold text-[var(--text-primary)]">Ayush</p>
-                    <p className="text-sm text-[var(--accent)] font-medium">Frontend Developer</p>
-                    <p className="text-xs text-[var(--text-secondary)] mt-1">Deloitte USI · Hyderabad</p>
+                  <div className="relative z-10 text-center px-4">
+                    <p className="text-xl font-bold text-[var(--text-primary)]">Ayush Kumar</p>
+                    <p className="text-sm text-[var(--accent)] font-medium">Frontend & AI Specialist</p>
+                    <p className="text-xs text-[var(--text-secondary)] mt-0.5">Deloitte USI · Hyderabad</p>
+                    <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide glass border border-emerald-500/30 text-emerald-400">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      Available for High-Impact Roles
+                    </div>
                   </div>
                   {/* Floating elements */}
                   <motion.div

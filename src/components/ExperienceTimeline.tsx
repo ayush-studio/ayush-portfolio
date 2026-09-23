@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Trophy } from "lucide-react";
+import { MapPin, Calendar, Trophy, Zap, Clock, ShieldCheck } from "lucide-react";
 import { EXPERIENCE } from "@/data/data";
 
 /**
@@ -22,7 +22,7 @@ export default function ExperienceTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-sm font-semibold tracking-widest uppercase text-[var(--accent)] mb-3">
             Career Journey
@@ -30,6 +30,51 @@ export default function ExperienceTimeline() {
           <h2 className="text-4xl sm:text-5xl font-bold text-[var(--text-primary)]">
             Professional <span className="gradient-text">Experience</span>
           </h2>
+        </motion.div>
+
+        {/* Quick Impact Metrics Highlights */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3.5 mb-10"
+        >
+          <div className="glass rounded-xl p-3.5 border border-[var(--border-color)] text-center hover:border-amber-400/40 transition-colors">
+            <div className="flex items-center justify-center gap-1.5 text-amber-400 mb-1">
+              <Trophy size={15} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Recognition</span>
+            </div>
+            <p className="text-base font-bold text-[var(--text-primary)]">Deloitte Applause</p>
+            <p className="text-[11px] text-[var(--text-secondary)]">Rapid AI UI Delivery</p>
+          </div>
+
+          <div className="glass rounded-xl p-3.5 border border-[var(--border-color)] text-center hover:border-indigo-400/40 transition-colors">
+            <div className="flex items-center justify-center gap-1.5 text-indigo-400 mb-1">
+              <Zap size={15} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Performance</span>
+            </div>
+            <p className="text-base font-bold text-[var(--text-primary)]">15–20% Faster</p>
+            <p className="text-[11px] text-[var(--text-secondary)]">Via GraphQL Queries</p>
+          </div>
+
+          <div className="glass rounded-xl p-3.5 border border-[var(--border-color)] text-center hover:border-emerald-400/40 transition-colors">
+            <div className="flex items-center justify-center gap-1.5 text-emerald-400 mb-1">
+              <Clock size={15} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Velocity</span>
+            </div>
+            <p className="text-base font-bold text-[var(--text-primary)]">4 Weeks</p>
+            <p className="text-[11px] text-[var(--text-secondary)]">Healthcare AI Shipped</p>
+          </div>
+
+          <div className="glass rounded-xl p-3.5 border border-[var(--border-color)] text-center hover:border-purple-400/40 transition-colors">
+            <div className="flex items-center justify-center gap-1.5 text-purple-400 mb-1">
+              <ShieldCheck size={15} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Scale</span>
+            </div>
+            <p className="text-base font-bold text-[var(--text-primary)]">Enterprise UI</p>
+            <p className="text-[11px] text-[var(--text-secondary)]">Angular, React & FastAPI</p>
+          </div>
         </motion.div>
 
         {/* Timeline */}

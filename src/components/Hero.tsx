@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowDown, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, Mail, Sparkles, FileText } from "lucide-react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
@@ -85,16 +85,12 @@ export default function Hero() {
           {/* Main Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]"
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.15] max-w-4xl"
           >
-            Hi, I&apos;m{" "}
-            <span className="gradient-text">Ayush.</span>
-            <br />
-            <span className="text-[var(--text-primary)]">
-              A Professional
-            </span>{" "}
-            <span className="relative inline-block">
-              <span className="gradient-text">Frontend Developer</span>
+            Hi, I&apos;m <span className="gradient-text">Ayush.</span>
+            <span className="block mt-3 sm:mt-4 text-3xl sm:text-5xl lg:text-6xl text-[var(--text-primary)]">
+              Frontend Developer &amp;{" "}
+              <span className="gradient-text">AI Specialist</span>
             </span>
           </motion.h1>
 
@@ -114,14 +110,14 @@ export default function Hero() {
           {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 mt-2"
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2"
           >
             <motion.button
               id="cta-view-work"
               onClick={() => scrollTo("projects")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-3.5 rounded-xl font-semibold text-white cursor-pointer
+              className="px-7 py-3 rounded-xl font-semibold text-white cursor-pointer
                          bg-gradient-to-r from-indigo-500 to-violet-600
                          shadow-lg shadow-indigo-500/30
                          hover:shadow-indigo-500/50 transition-shadow duration-300"
@@ -133,13 +129,28 @@ export default function Hero() {
               onClick={() => scrollTo("contact")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-3.5 rounded-xl font-semibold cursor-pointer
+              className="px-7 py-3 rounded-xl font-semibold cursor-pointer
                          glass border border-[var(--border-color)]
                          hover:border-[var(--accent)] text-[var(--text-primary)]
                          transition-colors duration-300"
             >
               Contact Me
             </motion.button>
+            <motion.a
+              id="cta-resume"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-6 py-3 rounded-xl font-semibold cursor-pointer
+                         inline-flex items-center gap-2
+                         glass border border-[var(--accent)]/40 text-[var(--accent)]
+                         hover:bg-[var(--accent)]/10 transition-colors duration-300"
+            >
+              <FileText size={16} />
+              Resume (PDF)
+            </motion.a>
           </motion.div>
 
           {/* Social Quick Links */}
