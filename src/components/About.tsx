@@ -80,7 +80,7 @@ export default function About() {
                   <div className="relative z-10 text-center px-4">
                     <p className="text-xl font-bold text-[var(--text-primary)]">Ayush Kumar</p>
                     <p className="text-sm text-[var(--accent)] font-medium">Frontend & AI Specialist</p>
-                    <p className="text-xs text-[var(--text-secondary)] mt-0.5">Deloitte USI · Hyderabad</p>
+                    <p className="text-xs text-[var(--text-secondary)] mt-0.5">Deloitte USI · Bengaluru</p>
                     <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide glass border border-emerald-500/30 text-emerald-400">
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

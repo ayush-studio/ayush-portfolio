@@ -43,7 +43,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     role: "Frontend Developer",
     company: "Deloitte USI",
     duration: "2022 – Present  (2.5+ years)",
-    location: "Hyderabad, India",
+    location: "Bengaluru, India",
     bullets: [
       {
         icon: "🤖",
