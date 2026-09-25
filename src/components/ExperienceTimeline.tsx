@@ -24,10 +24,10 @@ export default function ExperienceTimeline() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-[var(--accent)] mb-3">
-            Career Journey
+          <p className="text-xs sm:text-sm font-mono font-semibold tracking-widest uppercase text-[var(--accent)] mb-3">
+            03 // Career Journey &amp; Enterprise Impact
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)]">
             Professional <span className="gradient-text">Experience</span>
           </h2>
         </motion.div>

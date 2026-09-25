@@ -1,20 +1,21 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 /**
  * ThemeToggle — Animated Sun ↔ Moon toggle button using next-themes.
- * Uses AnimatePresence for smooth icon swap.
+ * Uses useSyncExternalStore to avoid hydration mismatch without cascading renders.
  */
 export default function ThemeToggle() {
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Avoid hydration mismatch
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
     return (

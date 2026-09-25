@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
+import { ToastProvider } from "@/components/Toast";
+import AppModals from "@/components/AppModals";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,11 +14,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ayush — Frontend Developer & AI Integrations",
+  title: "Ayush — Frontend Developer & AI Systems Architect",
   description:
-    "Personal portfolio of Ayush, a Frontend Developer with 2.5+ years at Deloitte USI specializing in React, Angular, TypeScript, and AI-driven web applications.",
+    "Personal portfolio of Ayush, a Frontend Developer with 2.5+ years at Deloitte USI specializing in React, Angular, TypeScript, performance engineering, and AI-driven web architectures.",
   keywords: [
     "Frontend Developer",
+    "Senior UI Engineer",
     "React",
     "Angular",
     "Next.js",
@@ -26,9 +30,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Ayush Kumar", url: "https://www.linkedin.com/in/ayush-kumar-017640191/" }],
   openGraph: {
-    title: "Ayush — Frontend Developer & AI Integrations",
+    title: "Ayush — Frontend Developer & AI Systems Architect",
     description:
-      "Frontend Developer with 2.5+ years at Deloitte USI. Building scalable enterprise apps and AI-driven user experiences.",
+      "Frontend Developer with 2.5+ years at Deloitte USI. Building scalable enterprise apps, deterministic static code analyzers, and AI-driven user experiences.",
     type: "website",
   },
 };
@@ -47,8 +51,12 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
-          <Navbar />
-          <main>{children}</main>
+          <ToastProvider>
+            <ScrollProgress />
+            <Navbar />
+            <main>{children}</main>
+            <AppModals />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

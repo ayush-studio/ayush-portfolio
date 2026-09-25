@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Code2, FileText } from "lucide-react";
+import { Menu, X, Code2, FileText, Command, Sparkles } from "lucide-react";
 import { NAV_LINKS } from "@/data/data";
 import ThemeToggle from "./ThemeToggle";
 
@@ -13,6 +12,8 @@ import ThemeToggle from "./ThemeToggle";
  * - Smooth-scroll section links
  * - Mobile hamburger menu
  * - Dark/Light mode toggle
+ * - Command palette (⌘K) quick trigger
+ * - Recruiter TL;DR modal trigger
  */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,11 +25,11 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Determine active section via IntersectionObserver-like scroll check
+      // Determine active section via scroll position check
       const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
       for (const id of [...sections].reverse()) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 100) {
+        if (el && window.scrollY >= el.offsetTop - 120) {
           setActiveSection(id);
           break;
         }
@@ -43,23 +44,25 @@ export default function Navbar() {
     href: string
   ) => {
     e.preventDefault();
-    // Close mobile menu first so layout settles before we measure
     setMobileOpen(false);
 
-    // Small delay on mobile lets the drawer close animation finish
-    // before we calculate the scroll position
     setTimeout(() => {
       const id = href.replace("#", "");
       const el = document.getElementById(id);
       if (!el) return;
 
-      // Offset by navbar height (64px) + a little breathing room (8px)
       const NAVBAR_HEIGHT = 72;
-      const top =
-        el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-
+      const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
       window.scrollTo({ top, behavior: "smooth" });
     }, 50);
+  };
+
+  const openCommandPalette = () => {
+    window.dispatchEvent(new CustomEvent("open-command-palette"));
+  };
+
+  const openRecruiterModal = () => {
+    window.dispatchEvent(new CustomEvent("open-recruiter-modal"));
   };
 
   return (
@@ -86,11 +89,11 @@ export default function Navbar() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
                 <Code2 size={16} className="text-white" />
               </div>
-              <span className="gradient-text">Ayush</span>
+              <span className="gradient-text font-bold tracking-tight">Ayush</span>
             </motion.a>
 
             {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.href.replace("#", "");
                 return (
@@ -98,7 +101,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer
+                    className={`relative px-3.5 py-1.5 text-xs xl:text-sm font-medium rounded-lg transition-colors duration-200 cursor-pointer
                       ${
                         isActive
                           ? "text-[var(--accent)]"
@@ -118,13 +121,34 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Right Side: Resume Button + Theme Toggle + Mobile Button */}
-            <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Right Side: Command Trigger + Recruiter Quick-View + Resume + Theme + Mobile */}
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              {/* Command Palette Button */}
+              <button
+                onClick={openCommandPalette}
+                className="hidden sm:inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-mono glass border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-colors cursor-pointer"
+                title="Open Command Menu (⌘K)"
+              >
+                <Command size={12} className="text-[var(--accent)]" />
+                <span className="text-[11px]">⌘K</span>
+              </button>
+
+              {/* Recruiter Quick-View Button */}
+              <button
+                onClick={openRecruiterModal}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold glass border border-[var(--accent)]/30 text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-colors cursor-pointer"
+                title="Open Recruiter Cheat Sheet"
+              >
+                <Sparkles size={13} className="text-[var(--accent)]" />
+                <span className="hidden sm:inline">Recruiter</span> TL;DR
+              </button>
+
+              {/* Resume Button */}
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
+                className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold
                            bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/25
                            hover:bg-[var(--accent)]/20 transition-all duration-200"
                 title="View Resume PDF"
@@ -132,12 +156,15 @@ export default function Navbar() {
                 <FileText size={13} />
                 Resume
               </a>
+
               <ThemeToggle />
+
+              {/* Mobile Drawer Button */}
               <button
                 id="mobile-menu-btn"
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden w-9 h-9 rounded-full flex items-center justify-center
-                           glass border border-[var(--border-color)] hover:border-[var(--accent)] transition-colors"
+                className="lg:hidden w-9 h-9 rounded-full flex items-center justify-center
+                           glass border border-[var(--border-color)] hover:border-[var(--accent)] transition-colors cursor-pointer"
                 aria-label="Toggle mobile menu"
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -177,7 +204,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed top-16 left-0 right-0 z-40 glass border-b border-[var(--border-color)] md:hidden overflow-hidden"
+            className="fixed top-16 left-0 right-0 z-40 glass border-b border-[var(--border-color)] lg:hidden overflow-hidden"
           >
             <div className="flex flex-col p-4 gap-1">
               {NAV_LINKS.map((link, i) => (
@@ -187,8 +214,8 @@ export default function Navbar() {
                   onClick={(e) => handleNavClick(e, link.href)}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors cursor-pointer
+                  transition={{ delay: i * 0.04 }}
+                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer
                     ${
                       activeSection === link.href.replace("#", "")
                         ? "bg-[var(--accent)]/10 text-[var(--accent)]"
@@ -198,17 +225,42 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center gap-2 mt-2 px-4 py-2.5 text-sm font-semibold rounded-lg
-                           bg-[var(--accent)] text-white shadow-md shadow-indigo-500/20"
-              >
-                <FileText size={15} />
-                View Resume (PDF)
-              </a>
+
+              <div className="pt-2 mt-1 border-t border-[var(--border-color)] flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openRecruiterModal();
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-lg glass border border-[var(--accent)]/40 text-[var(--accent)]"
+                >
+                  <Sparkles size={14} />
+                  Open Recruiter Cheat Sheet
+                </button>
+
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openCommandPalette();
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-mono rounded-lg glass border border-[var(--border-color)] text-[var(--text-secondary)]"
+                >
+                  <Command size={14} />
+                  Open Command Menu (⌘K)
+                </button>
+
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-lg
+                             bg-[var(--accent)] text-white shadow-md shadow-indigo-500/20"
+                >
+                  <FileText size={14} />
+                  View Resume (PDF)
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

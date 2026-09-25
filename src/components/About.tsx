@@ -39,11 +39,11 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-[var(--accent)] mb-3">
-            Get to know me
+          <p className="text-xs sm:text-sm font-mono font-semibold tracking-widest uppercase text-[var(--accent)] mb-3">
+            01 // Architectural Background
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--text-primary)]">
-            About <span className="gradient-text">Me</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)]">
+            About <span className="gradient-text">My Engineering Journey</span>
           </h2>
         </motion.div>
 
