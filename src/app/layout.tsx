@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import { ToastProvider } from "@/components/Toast";
 import AppModals from "@/components/AppModals";
+import DeveloperHUD from "@/components/DeveloperHUD";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,10 +52,42 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Ayush Kumar",
+                jobTitle: "Senior Frontend Developer & AI Systems Architect",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Deloitte USI",
+                },
+                url: "https://ayush-portfolio.vercel.app",
+                sameAs: [
+                  "https://github.com/ayush-studio",
+                  "https://www.linkedin.com/in/ayush-kumar-017640191/",
+                ],
+                knowsAbout: [
+                  "React",
+                  "Angular",
+                  "Next.js",
+                  "TypeScript",
+                  "JavaScript",
+                  "GraphQL",
+                  "FastAPI",
+                  "Deterministic Static Code Analysis",
+                  "Generative AI Workflows",
+                ],
+              }),
+            }}
+          />
           <ToastProvider>
             <ScrollProgress />
             <Navbar />
             <main>{children}</main>
+            <DeveloperHUD />
             <AppModals />
           </ToastProvider>
         </ThemeProvider>

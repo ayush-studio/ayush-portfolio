@@ -6,6 +6,7 @@ import { ExternalLink, GitBranch, Sparkles, Zap, FileCode } from "lucide-react";
 import { FLAGSHIP_PROJECTS, type FlagshipCaseStudy } from "@/data/data";
 import SpotlightCard from "./SpotlightCard";
 import CaseStudyModal from "./CaseStudyModal";
+import CodeLineageMiniLab from "./CodeLineageMiniLab";
 
 export default function FlagshipShowcase() {
   const [activeStudy, setActiveStudy] = useState<FlagshipCaseStudy | null>(null);
@@ -141,6 +142,9 @@ export default function FlagshipShowcase() {
                     </div>
                   </div>
                 </div>
+
+                {/* Interactive Mini-Lab for Code Scanner */}
+                {project.id === "code-scanner" && <CodeLineageMiniLab />}
               </SpotlightCard>
             </motion.div>
           ))}
