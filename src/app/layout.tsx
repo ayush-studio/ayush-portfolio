@@ -17,7 +17,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Ayush — Frontend Developer & AI Systems Architect",
   description:
-    "Personal portfolio of Ayush, a Frontend Developer with 2.5+ years at Deloitte USI specializing in React, Angular, TypeScript, performance engineering, and AI-driven web architectures.",
+    "Personal portfolio of Ayush, a Frontend Developer at Deloitte USI (2024 – Present) specializing in React, Angular, TypeScript, performance engineering, and AI-driven web architectures.",
   keywords: [
     "Frontend Developer",
     "Senior UI Engineer",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ayush — Frontend Developer & AI Systems Architect",
     description:
-      "Frontend Developer with 2.5+ years at Deloitte USI. Building scalable enterprise apps, deterministic static code analyzers, and AI-driven user experiences.",
+      "Frontend Developer at Deloitte USI (2024 – Present). Building scalable enterprise apps, deterministic static code analyzers, and AI-driven user experiences.",
     type: "website",
   },
 };

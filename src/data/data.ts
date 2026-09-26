@@ -15,10 +15,10 @@ export const NAV_LINKS = [
 ];
 
 // ─── About Section ───────────────────────────────────────────────────────────
-export const ABOUT_SUMMARY = `Frontend Developer with 2.5+ years of experience at Deloitte USI, building scalable enterprise web applications using React, Angular, Next.js, JavaScript, and TypeScript. Passionate about architecting high-speed developer tools, static code analysis engines, and integrating AI capabilities into modern workflows — from intuitive UI design to serverless microservices and intelligent GenAI systems.`;
+export const ABOUT_SUMMARY = `Frontend Developer at Deloitte USI (2024 – Present), building scalable enterprise web applications using React, Angular, Next.js, JavaScript, and TypeScript. Passionate about architecting high-speed developer tools, static code analysis engines, and integrating AI capabilities into modern workflows — from intuitive UI design to serverless microservices and intelligent GenAI systems.`;
 
 export const ABOUT_STATS = [
-  { label: "Years of Experience", value: "2.5+" },
+  { label: "Experience", value: "2024 – Now" },
   { label: "Enterprise Projects", value: "10+" },
   { label: "AI & Serverless Tools", value: "6+" },
   { label: "Award", value: "🏆 Applause" },
@@ -43,7 +43,7 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     role: "Frontend Developer",
     company: "Deloitte USI",
-    duration: "2022 – Present  (2.5+ years)",
+    duration: "2024 – Present",
     location: "Bengaluru, India",
     bullets: [
       {
@@ -367,7 +367,7 @@ export const RECRUITER_QUICK_FACTS = {
   name: "Ayush Kumar",
   title: "Frontend Developer & AI Specialist",
   targetRoles: ["Senior Frontend Engineer", "UI Developer / UI Architect", "Full-Stack UI Engineer"],
-  totalExperience: "2.5+ Years (Deloitte USI)",
+  totalExperience: "2024 – Present (Deloitte USI)",
   location: "Bengaluru, Karnataka, India",
   workPreference: "Hybrid / On-site / Remote (Immediate to 30 days notice)",
   coreSkills: [

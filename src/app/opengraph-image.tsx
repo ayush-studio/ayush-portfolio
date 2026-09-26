@@ -41,7 +41,7 @@ export default async function Image() {
               letterSpacing: "0.05em",
             }}
           >
-            DELOITTE USI · 2.5+ YEARS
+            DELOITTE USI · 2024 – PRESENT
           </div>
           <div
             style={{

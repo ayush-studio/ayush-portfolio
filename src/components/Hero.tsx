@@ -155,7 +155,7 @@ export default function Hero() {
             variants={itemVariants}
             className="max-w-2xl text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed"
           >
-            2.5+ years at <span className="text-[var(--text-primary)] font-semibold">Deloitte USI</span> crafting
+            Frontend Developer at <span className="text-[var(--text-primary)] font-semibold">Deloitte USI</span> (2024 – Present) crafting
             high-throughput web systems, deterministic code analysis engines, and GenAI workflows.{" "}
             <span className="text-[var(--text-primary)] font-medium">
               Obsessed with 60FPS render budgets, typed architectures, and micro-craft.
